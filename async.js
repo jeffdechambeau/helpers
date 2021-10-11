@@ -1,11 +1,3 @@
-const async_each = async (list, callback) => {
-  if (!list || list == undefined) return;
-  for (let i = 0; i < list.length; i++) {
-    const item = list[i];
-    await callback(item, i);
-  }
-};
-
 const async_map = async (list, callback) => {
   if (!list || list == undefined) return null;
 
@@ -19,4 +11,4 @@ const async_map = async (list, callback) => {
   return output;
 };
 
-module.exports = { async_each, async_map };
+module.exports = { async_map };
