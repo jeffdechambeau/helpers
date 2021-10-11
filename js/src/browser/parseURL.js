@@ -2,6 +2,8 @@
 // 'blah.com?Arg=String&Boolean' => { Arg: 'String', Boolean: true }
 
 const parse = (url) => {
+  if (!url.includes("?")) return [];
+
   const breakAt = url.indexOf("?"),
     tail = url.substring(breakAt + 1),
     chunks = tail.split("&");
@@ -14,6 +16,7 @@ const parse = (url) => {
 };
 
 const format = (arr) => {
+  if (!arr.length) return {};
   const pairs = arr.map(([key, value]) => ({ [key]: value }));
 
   return pairs.reduce((result, current) => {
@@ -24,10 +27,7 @@ const format = (arr) => {
   });
 };
 
-module.exports = () => {
-  const url = window.location.href;
-  if (!url.includes("?")) return {};
-
+module.exports = (url = window.location.href) => {
   const parsed = parse(url);
   return format(parsed);
 };
