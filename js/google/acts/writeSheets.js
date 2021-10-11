@@ -3,15 +3,13 @@ const { sheets: client } = require("../client");
 module.exports = async ({ spreadsheetId, values, range, majorDimension }) => {
   const sheets = await client();
 
-  values = [...values.map((v) => [v])];
-
   const query = {
     spreadsheetId,
     resource: {
       data: [
         {
-          range, // Update a column
-          values,
+          range,
+          values: values.map((v) => [v]),
           majorDimension,
         },
       ],
@@ -19,5 +17,5 @@ module.exports = async ({ spreadsheetId, values, range, majorDimension }) => {
     },
   };
 
-  const update = await sheets.spreadsheets.values.batchUpdate(query);
+  await sheets.spreadsheets.values.batchUpdate(query);
 };

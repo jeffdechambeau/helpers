@@ -1,3 +1,6 @@
+// Extracts arguments from url string
+// 'blah.com?Arg=String&Boolean' => { Arg: 'String', Boolean: true }
+
 const parse = (url) => {
   const breakAt = url.indexOf("?"),
     tail = url.substring(breakAt + 1),
@@ -21,12 +24,10 @@ const format = (arr) => {
   });
 };
 
-const getArgsFromURL = () => {
+module.exports = () => {
   const url = window.location.href;
   if (!url.includes("?")) return {};
 
   const parsed = parse(url);
   return format(parsed);
 };
-
-module.exports = { getArgsFromURL };
